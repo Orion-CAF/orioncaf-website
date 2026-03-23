@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OrionCAF — AI Engineering</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #4F46E5;
+    --accent-hover: #4338CA;
+    --bg: #ffffff;
+    --surface: #F9FAFB;
+    --border: rgba(0,0,0,0.10);
+    --border-md: rgba(0,0,0,0.18);
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+    --text-tertiary: #9CA3AF;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--text-primary); background: var(--bg); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 62px;
+    background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 600; letter-spacing: -0.3px; text-decoration: none; color: var(--text-primary); }
+  .nav-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 13px; color: var(--text-secondary); text-decoration: none; transition: color .15s; }
+  .nav-links a:hover { color: var(--text-primary); }
+  .nav-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-ghost { font-size: 13px; padding: 7px 16px; border-radius: var(--radius-md); border: 0.5px solid var(--border-md); background: transparent; color: var(--text-primary); cursor: pointer; font-family: var(--font); transition: background .15s; }
+  .btn-ghost:hover { background: var(--surface); }
+  .btn-primary { font-size: 13px; padding: 7px 16px; border-radius: var(--radius-md); border: none; background: var(--accent); color: #fff; cursor: pointer; font-family: var(--font); font-weight: 500; transition: background .15s; }
+  .btn-primary:hover { background: var(--accent-hover); }
+
+  /* ── HERO ── */
+  .hero { text-align: center; padding: 80px 48px 72px; max-width: 800px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 12px; font-weight: 500; color: var(--accent);
+    background: #EEF2FF; padding: 5px 14px; border-radius: 99px; margin-bottom: 28px;
+  }
+  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .hero h1 { font-size: 50px; font-weight: 600; line-height: 1.12; letter-spacing: -1.5px; color: var(--text-primary); margin-bottom: 22px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 17px; color: var(--text-secondary); line-height: 1.7; max-width: 580px; margin: 0 auto 36px; }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; }
+  .btn-hero { font-size: 14px; padding: 12px 26px; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font); font-weight: 500; transition: all .15s; }
+  .btn-hero-primary { background: var(--accent); color: #fff; border: none; }
+  .btn-hero-primary:hover { background: var(--accent-hover); }
+  .btn-hero-secondary { background: transparent; color: var(--text-primary); border: 0.5px solid var(--border-md); }
+  .btn-hero-secondary:hover { background: var(--surface); }
+
+  /* ── METRICS ── */
+  .metrics {
+    display: flex; justify-content: center;
+    border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border);
+    padding: 36px 48px;
+  }
+  .metric { text-align: center; flex: 1; max-width: 190px; padding: 0 20px; border-right: 0.5px solid var(--border); }
+  .metric:last-child { border-right: none; }
+  .metric-num { font-size: 30px; font-weight: 600; letter-spacing: -0.5px; color: var(--text-primary); }
+  .metric-num span { color: var(--accent); }
+  .metric-label { font-size: 12px; color: var(--text-tertiary); margin-top: 5px; line-height: 1.4; }
+
+  /* ── SECTIONS ── */
+  .section { padding: 80px 48px; max-width: 1080px; margin: 0 auto; }
+  .section-tag { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
+  .section-title { font-size: 34px; font-weight: 600; letter-spacing: -0.5px; line-height: 1.18; margin-bottom: 16px; }
+  .section-sub { font-size: 15px; color: var(--text-secondary); max-width: 520px; line-height: 1.7; margin-bottom: 52px; }
+
+  /* ── SERVICE CARDS ── */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .service-card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px;
+    transition: border-color .2s, box-shadow .2s; cursor: pointer;
+  }
+  .service-card:hover { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(79,70,229,0.07); }
+  .service-icon {
+    width: 38px; height: 38px; border-radius: var(--radius-md);
+    background: #EEF2FF; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .service-icon svg { width: 18px; height: 18px; }
+  .service-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+  .service-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.65; }
+  .service-link { display: flex; align-items: center; gap: 4px; margin-top: 14px; font-size: 12px; color: var(--accent); font-weight: 500; }
+
+  /* ── FEATURE ROWS ── */
+  .features-wrap { max-width: 1080px; margin: 0 auto; padding: 0 48px 80px; }
+  .feature-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
+    align-items: center; padding: 64px 0;
+    border-top: 0.5px solid var(--border);
+  }
+  .feature-tag { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 14px; }
+  .feature-row h2 { font-size: 28px; font-weight: 600; letter-spacing: -0.4px; line-height: 1.22; margin-bottom: 14px; }
+  .feature-row p { font-size: 14px; color: var(--text-secondary); line-height: 1.75; margin-bottom: 20px; }
+  .feature-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+  .feature-list li { font-size: 13px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 9px; }
+  .feature-list li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 7px; }
+  .feature-visual {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 28px;
+  }
+  .feature-row.reverse .feature-visual { order: -1; }
+
+  /* ── PIPELINE ── */
+  .pipeline-label { font-size: 11px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; }
+  .pipeline { display: flex; align-items: center; gap: 0; margin-bottom: 24px; }
+  .pipe-step {
+    flex: 1; background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-md); padding: 10px 6px; text-align: center;
+  }
+  .pipe-step.active { border-color: var(--accent); background: #EEF2FF; }
+  .pipe-step .pipe-lbl { font-size: 11px; font-weight: 600; color: var(--text-primary); }
+  .pipe-step.active .pipe-lbl { color: var(--accent); }
+  .pipe-step .pipe-sub { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+  .pipe-arrow { width: 18px; text-align: center; font-size: 12px; color: var(--text-tertiary); flex-shrink: 0; }
+  .latency-section { margin-top: 20px; }
+  .latency-section .latency-label-top { font-size: 11px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+  .latency-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .lat-name { font-size: 12px; color: var(--text-secondary); width: 52px; flex-shrink: 0; }
+  .lat-bar-bg { flex: 1; height: 5px; background: #E5E7EB; border-radius: 3px; overflow: hidden; }
+  .lat-bar { height: 100%; background: var(--accent); border-radius: 3px; }
+  .lat-val { font-size: 11px; font-weight: 600; color: var(--accent); width: 44px; text-align: right; }
+  .lat-val.total { color: var(--text-primary); }
+
+  /* ── METRIC CARDS ── */
+  .metric-cards { display: flex; flex-direction: column; gap: 10px; }
+  .mcard {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-md); padding: 14px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .mcard-left .mcard-title { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .mcard-left .mcard-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; }
+  .mcard-num { font-size: 22px; font-weight: 600; color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .project-card {
+    background: var(--bg); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 22px;
+    transition: border-color .2s; cursor: pointer;
+  }
+  .project-card:hover { border-color: var(--border-md); }
+  .project-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    color: var(--accent); background: #EEF2FF;
+    padding: 3px 9px; border-radius: 99px; margin-bottom: 12px;
+  }
+  .project-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 7px; }
+  .project-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
+  .project-award {
+    display: inline-flex; align-items: center; gap: 4px;
+    margin-top: 12px; font-size: 11px; color: var(--text-secondary);
+    background: var(--surface); padding: 4px 9px; border-radius: 99px;
+  }
+
+  /* ── PUBLICATION ── */
+  .pub-card {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 26px 30px;
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .pub-icon {
+    width: 42px; height: 42px; flex-shrink: 0; border-radius: var(--radius-md);
+    background: #EEF2FF; display: flex; align-items: center; justify-content: center;
+  }
+  .pub-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+  .pub-authors { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+  .pub-journal { font-size: 12px; color: var(--accent); font-weight: 500; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--accent); border-radius: var(--radius-lg);
+    padding: 60px 48px; text-align: center;
+    margin: 0 48px 80px;
+  }
+  .cta-banner h2 { font-size: 30px; font-weight: 600; color: #fff; letter-spacing: -0.4px; margin-bottom: 14px; }
+  .cta-banner p { font-size: 15px; color: rgba(255,255,255,0.72); max-width: 460px; margin: 0 auto 32px; line-height: 1.65; }
+  .cta-actions { display: flex; gap: 10px; justify-content: center; }
+  .btn-cta-white { font-size: 14px; padding: 12px 26px; border-radius: var(--radius-md); background: #fff; color: var(--accent); border: none; cursor: pointer; font-family: var(--font); font-weight: 600; transition: opacity .15s; }
+  .btn-cta-white:hover { opacity: .88; }
+  .btn-cta-outline { font-size: 14px; padding: 12px 26px; border-radius: var(--radius-md); background: transparent; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3); cursor: pointer; font-family: var(--font); transition: opacity .15s; }
+  .btn-cta-outline:hover { opacity: .7; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 48px 48px 0;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  }
+  .footer-brand { font-size: 15px; font-weight: 600; display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
+  .footer-brand-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .footer-tagline { font-size: 13px; color: var(--text-tertiary); line-height: 1.6; max-width: 220px; }
+  .footer-col h4 { font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-bottom: 14px; }
+  .footer-col a { display: block; font-size: 13px; color: var(--text-tertiary); text-decoration: none; margin-bottom: 9px; transition: color .15s; }
+  .footer-col a:hover { color: var(--text-secondary); }
+  .footer-bottom {
+    border-top: 0.5px solid var(--border);
+    margin-top: 40px; padding: 18px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 12px; color: var(--text-tertiary); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 60px 24px 56px; }
+    .hero h1 { font-size: 36px; }
+    .metrics { flex-wrap: wrap; padding: 28px 24px; }
+    .metric { min-width: 45%; margin-bottom: 20px; border-right: none; }
+    .section { padding: 56px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .features-wrap { padding: 0 24px 56px; }
+    .feature-row { grid-template-columns: 1fr; gap: 32px; }
+    .feature-row.reverse .feature-visual { order: 0; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .cta-banner { margin: 0 24px 60px; padding: 40px 24px; }
+    footer { grid-template-columns: 1fr 1fr; padding: 40px 24px 0; }
+    .footer-bottom { padding: 16px 24px; flex-direction: column; gap: 6px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    OrionCAF
+  </a>
+  <div class="nav-links">
+    <a href="#solutions">Solutions</a>
+    <a href="#projects">Projects</a>
+    <a href="#research">Research</a>
+    <a href="#about">About</a>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-ghost">Sign in</button>
+    <button class="btn-primary">Contact us →</button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    AI first engineering from Turkey
+  </div>
+  <h1>Build smarter systems<br>with <em>AI that actually works</em></h1>
+  <p>Speech to speech pipelines, LLM fine tuning, RAG systems, and intelligent automation — designed for production, optimized for your industry.</p>
+  <div class="hero-actions">
+    <button class="btn-hero btn-hero-primary">Start a project</button>
+    <button class="btn-hero btn-hero-secondary">See our work</button>
+  </div>
+</section>
+
+<!-- ═══ METRICS ═══ -->
+<div class="metrics">
+  <div class="metric">
+    <div class="metric-num"><span>3</span></div>
+    <div class="metric-label">AI engineers on the team</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><span>1000</span>+</div>
+    <div class="metric-label">Hugging Face model downloads</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><span>600</span>+</div>
+    <div class="metric-label">Active app users (organic)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num"><span>1</span></div>
+    <div class="metric-label">Peer reviewed publication (2025)</div>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="section" id="solutions">
+  <div class="section-tag">What we build</div>
+  <h2 class="section-title">AI solutions across the full stack</h2>
+  <p class="section-sub">From voice pipelines to enterprise automation — we design, train, and deploy systems that run in production.</p>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 9h12M9 3v12" stroke="#4F46E5" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="9" cy="9" r="7" stroke="#4F46E5" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <h3>n8n Automations</h3>
+      <p>Tourism price calculator automation, clinic agent automation (appointments, info, pricing). End to end no code AI workflows.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="9" cy="6" r="3" stroke="#4F46E5" stroke-width="1.2"/>
+          <path d="M3 15c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" stroke="#4F46E5" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M13.5 3.5c1.1.9 1.8 2.2 1.8 3.7s-.7 2.8-1.8 3.7" stroke="#4F46E5" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>AI Speech to Speech</h3>
+      <p>End to end real time voice AI — Whisper ASR, custom TTS, LLM reasoning. Sub second latency, production ready pipelines.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="6" height="6" rx="1.5" stroke="#4F46E5" stroke-width="1.2"/>
+          <rect x="10" y="2" width="6" height="6" rx="1.5" stroke="#4F46E5" stroke-width="1.2"/>
+          <rect x="2" y="10" width="6" height="6" rx="1.5" stroke="#4F46E5" stroke-width="1.2"/>
+          <rect x="10" y="10" width="6" height="6" rx="1.5" stroke="#4F46E5" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <h3>LLM Fine Tuning</h3>
+      <p>Domain specific model training with LoRA, 4 bit quantization, and Unsloth. Hardware agnostic deployment — cloud, on prem, or edge.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 5h12M3 9h12M3 13h8" stroke="#4F46E5" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>RAG & Knowledge Systems</h3>
+      <p>Secure, offline retrieval augmented generation over your private data. FAISS, Pinecone, semantic reranking, guardrails.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="4" cy="9" r="2.2" stroke="#4F46E5" stroke-width="1.2"/>
+          <circle cx="14" cy="4" r="2.2" stroke="#4F46E5" stroke-width="1.2"/>
+          <circle cx="14" cy="14" r="2.2" stroke="#4F46E5" stroke-width="1.2"/>
+          <path d="M6 8.5L11.8 5.5M6 9.5L11.8 12.5" stroke="#4F46E5" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>AI Automation (n8n)</h3>
+      <p>Intelligent workflow automation connecting your APIs, databases, and AI models. No ops pipelines that run themselves.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4.5" y="1" width="9" height="16" rx="2" stroke="#4F46E5" stroke-width="1.2"/>
+          <circle cx="9" cy="14.5" r="0.9" fill="#4F46E5"/>
+          <path d="M6.5 4h5" stroke="#4F46E5" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Mobile App Development</h3>
+      <p>AI powered iOS & Android apps — from idea to App Store. We build and ship products with embedded intelligence.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 2l1.9 4.2 4.6.4-3.4 3 1 4.4L9 11.7l-4.1 2.3 1-4.4-3.4-3 4.6-.4L9 2z" stroke="#4F46E5" stroke-width="1.2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>AI Architecture & Consulting</h3>
+      <p>System design, tech roadmap, model selection, and on prem GPU deployment. We help you build the right thing, right.</p>
+      <div class="service-link">Learn more →</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<div class="features-wrap">
+
+  <!-- Feature 1: Speech -->
+  <div class="feature-row">
+    <div class="feature-text">
+      <div class="feature-tag">Core capability</div>
+      <h2>Real time speech AI with sub second latency</h2>
+      <p>We build full stack voice agents that understand, reason, and respond — in Turkish and English. From ASR to TTS with LLM at the core.</p>
+      <ul class="feature-list">
+        <li>Whisper Large v3 fine tuned for Turkish ASR</li>
+        <li>Custom TTS with all of Turkish models (LLM, TS, STT) and PiperTTS voice cloning</li>
+        <li>LiveKit powered real time communication layer</li>
+        <li>Pipecat powered real time communication layer</li>
+        <li>Deployable on RunPod, on prem A100/H100, or serverless</li>
+      </ul>
+      <button class="btn-ghost" style="font-size:13px;">See technical details →</button>
+    </div>
+    <div class="feature-visual">
+      <div class="pipeline-label">Pipeline</div>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-lbl">Audio in</div>
+          <div class="pipe-sub">Mic / stream</div>
+        </div>
+        <div class="pipe-arrow">›</div>
+        <div class="pipe-step active">
+          <div class="pipe-lbl">ASR</div>
+          <div class="pipe-sub">Whisper</div>
+        </div>
+        <div class="pipe-arrow">›</div>
+        <div class="pipe-step active">
+          <div class="pipe-lbl">LLM</div>
+          <div class="pipe-sub">Reasoning</div>
+        </div>
+        <div class="pipe-arrow">›</div>
+        <div class="pipe-step active">
+          <div class="pipe-lbl">TTS</div>
+          <div class="pipe-sub">Turkish models</div>
+        </div>
+        <div class="pipe-arrow">›</div>
+        <div class="pipe-step">
+          <div class="pipe-lbl">Audio out</div>
+          <div class="pipe-sub">Speaker</div>
+        </div>
+      </div>
+      <div class="latency-section">
+        <div class="latency-label-top">Latency targets</div>
+        <div class="latency-row">
+          <div class="lat-name">ASR</div>
+          <div class="lat-bar-bg"><div class="lat-bar" style="width:30%"></div></div>
+          <div class="lat-val">&lt;200ms</div>
+        </div>
+        <div class="latency-row">
+          <div class="lat-name">LLM</div>
+          <div class="lat-bar-bg"><div class="lat-bar" style="width:55%;background:#7C3AED"></div></div>
+          <div class="lat-val" style="color:#7C3AED">&lt;400ms</div>
+        </div>
+        <div class="latency-row">
+          <div class="lat-name">TTS</div>
+          <div class="lat-bar-bg"><div class="lat-bar" style="width:22%"></div></div>
+          <div class="lat-val">&lt;150ms</div>
+        </div>
+        <div class="latency-row" style="margin-top:6px;padding-top:6px;border-top:0.5px solid #E5E7EB">
+          <div class="lat-name" style="font-weight:600;color:#111827">Total</div>
+          <div class="lat-bar-bg"><div class="lat-bar" style="width:72%;background:linear-gradient(90deg,#4F46E5,#7C3AED)"></div></div>
+          <div class="lat-val total">&lt;1s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 2: Turkish LLM (reversed) -->
+  <div class="feature-row reverse">
+    <div class="feature-text">
+      <div class="feature-tag">Turkish AI</div>
+      <h2>Local LLMs. Turkish first. No data leaves your server.</h2>
+      <p>We train and optimize language models for Turkish — for law, agriculture, education, and enterprise. Everything runs on prem when privacy demands it.</p>
+      <ul class="feature-list">
+        <li>4 bit quantization (INT4/INT8) without accuracy loss</li>
+        <li>LoRA fine tuning with Unsloth for efficient training</li>
+        <li>Open source Turkish models on Hugging Face (1000+ downloads)</li>
+        <li>Peer reviewed research: Veri Bilimi 2025</li>
+      </ul>
+      <button class="btn-ghost" style="font-size:13px;">View our models →</button>
+    </div>
+    <div class="feature-visual">
+      <div class="pipeline-label">Optimization results</div>
+      <div class="metric-cards">
+        <div class="mcard">
+          <div class="mcard-left">
+            <div class="mcard-title">TTS quality improvement</div>
+            <div class="mcard-sub">Via fine tuning and error analysis</div>
+          </div>
+          <div class="mcard-num">+30%</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-left">
+            <div class="mcard-title">RAG response accuracy</div>
+            <div class="mcard-sub">Retriever + reranker + semantic cache</div>
+          </div>
+          <div class="mcard-num">+50%</div>
+        </div>
+        <div class="mcard">
+          <div class="mcard-left">
+            <div class="mcard-title">ASR performance gain</div>
+            <div class="mcard-sub">Whisper fine tuning for Turkish</div>
+          </div>
+          <div class="mcard-num">+20%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ PROJECTS ═══ -->
+<section class="section" id="projects">
+  <div class="section-tag">Work</div>
+  <h2 class="section-title">Selected projects</h2>
+  <p class="section-sub">From high impact projects to open source models with thousands of downloads.</p>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-tag">Speech AI</div>
+      <h3>All of Turkish models (LLM, TS, STT)</h3>
+      <p>Turkish text to speech with voice cloning. Published on Hugging Face — 1000+ downloads by the community.</p>
+      <div class="project-award">🤗 Hugging Face · Open source</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">LLM · RAG</div>
+      <h3>Legal LLM Chatbot</h3>
+      <p>Retrieval augmented legal Q&A system with document indexing, semantic search, and guardrails.</p>
+      <div class="project-award">🏆 Featured project</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">AI Agents</div>
+      <h3>TUSAŞ R&D Agent System</h3>
+      <p>Autonomous agents scanning research papers and patents to propose R&D ideas for Turkish Aerospace Industries.</p>
+      <div class="project-award">🚀 TUSAŞ collaboration</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Mobile</div>
+      <h3>LawBuddy</h3>
+      <p>Mobile app for law students with analytics and progress insights. Grew to 600+ active users entirely through organic reach.</p>
+      <div class="project-award">📱 600+ users</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Web · AI</div>
+      <h3>AI Pulse</h3>
+      <p>Real time AI news aggregator from Arxiv, Hugging Face, and tech blogs with a built in "Spark AI" summarization tool.</p>
+      <div class="project-award">⚡ aipulseseven.vercel.app</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">Speech AI · RAG</div>
+      <h3>Real Time Voice AI Assistant</h3>
+      <p>Full stack voice AI with streaming audio, RAG for context aware responses, and optimized end to end latency.</p>
+      <div class="project-award">🔊 Sub second pipeline</div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-tag">AI Automation · n8n</div>
+      <h3>Tourism Company Operation Manager Agent</h3>
+      <p>Tourism company operation manager agent with n8n and LLM. Automates price calculating and mail reply workflows.</p>
+      <div class="project-award">⚙️ n8n · LLM powered</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ RESEARCH ═══ -->
+<section class="section" id="research" style="padding-top:0">
+  <div class="section-tag">Research</div>
+  <h2 class="section-title">Peer reviewed publication</h2>
+  <div class="pub-card">
+    <div class="pub-icon">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <rect x="3" y="2" width="14" height="16" rx="2" stroke="#4F46E5" stroke-width="1.2"/>
+        <path d="M6.5 6.5h7M6.5 10h7M6.5 13.5h4.5" stroke="#4F46E5" stroke-width="1" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="pub-title">Quantization Compensation in Turkish LLMs: An Evaluation of Accuracy, Speed, and Memory Usage</div>
+      <div class="pub-authors">Bayram, C., Turan, C. A., Kürkçüoğlu, F., & Altıntaş, V. · 2025</div>
+      <div class="pub-journal">Veri Bilimi, 8(2), 70–80 · izlik.org/JA77KD25EM</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ═══ -->
+<div class="cta-banner">
+  <h2>Ready to build with AI?</h2>
+  <p>Tell us about your project. We'll design the right system architecture and get it into production.</p>
+  <div class="cta-actions">
+    <button class="btn-cta-white">Start a conversation</button>
+    <button class="btn-cta-outline">Explore services</button>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="about">
+  <div>
+    <div class="footer-brand"><div class="footer-brand-dot"></div>OrionCAF</div>
+    <div class="footer-tagline">AI engineering — speech, language, automation, and beyond. Built in Turkey, deployed globally.</div>
+  </div>
+  <div class="footer-col">
+    <h4>Solutions</h4>
+    <a href="#">Speech to Speech AI</a>
+    <a href="#">LLM Fine Tuning</a>
+    <a href="#">RAG Systems</a>
+    <a href="#">AI Automation</a>
+    <a href="#">Mobile & Web</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="#">About</a>
+    <a href="#">Projects</a>
+    <a href="#">Research</a>
+    <a href="#">Open Source</a>
+  </div>
+  <div class="footer-col">
+    <h4>Connect</h4>
+    <a href="https://www.linkedin.com/company/107349213" target="_blank">LinkedIn</a>
+    <a href="https://huggingface.co/OrionCAF" target="_blank">Hugging Face</a>
+    <a href="https://github.com/Caturan" target="_blank">GitHub</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© OrionCAF 2025 — Manisa, Turkey</p>
+  <p>Built on open source AI</p>
+</div>
+
+</body>
+</html>
