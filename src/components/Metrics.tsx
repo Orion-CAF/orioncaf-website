@@ -36,10 +36,10 @@ function useCountUp(end: number, duration = 1600) {
 }
 
 const metrics = [
-  { end: 7, suffix: "+", hasBorder: true },
+  { end: 15, suffix: "+", hasBorder: true },
   { end: 1000, suffix: "+", hasBorder: true },
-  { end: 600, suffix: "+", hasBorder: true },
-  { end: 1, suffix: "", hasBorder: false },
+  { end: 1000, suffix: "+", hasBorder: true },
+  { end: 5, suffix: "", hasBorder: false },
 ];
 
 const dictKeys = ["engineers", "downloads", "users", "publications"] as const;

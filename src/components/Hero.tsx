@@ -39,13 +39,6 @@ export default function Hero({ dict }: { dict: any }) {
           {dict.work}
         </a>
       </div>
-      <div className="hero-social-proof" style={{marginTop:'28px',fontSize:'12px',color:'var(--color-border-md)',display:'flex',alignItems:'center',gap:'16px',justifyContent:'center'}}>
-        <span style={{color: '#888', fontWeight: 500}}>🤗 Hugging Face</span>
-        <span style={{color:'var(--color-border-md)'}}>·</span>
-        <span style={{color: '#888', fontWeight: 500}}>🏛 TUSAŞ</span>
-        <span style={{color:'var(--color-border-md)'}}>·</span>
-        <span style={{color: '#888', fontWeight: 500}}>📄 Veri Bilimi 2025</span>
-      </div>
     </section>
   );
 }
