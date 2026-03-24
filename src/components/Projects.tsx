@@ -39,12 +39,12 @@ export default function Projects({ dict }: { dict: any }) {
 function ProjectCard({ tag, title, desc, award }: { tag: string; title: string; desc: string; award: string }) {
   return (
     <div className="animate-child card-hover bg-white border border-black/[0.06] rounded-2xl p-6 md:p-7 transition-all duration-250 cursor-pointer hover:border-black/15">
-      <div className="inline-block text-[11px] font-semibold text-accent bg-green-50 px-3 py-1 rounded-full mb-4">
+      <div className="inline-block text-[11px] font-semibold text-accent bg-green-50 px-3 py-1 rounded-full mb-4 project-tag" style={{letterSpacing: '0.02em'}}>
         {tag}
       </div>
       <h3 className="text-[15px] font-bold mb-2.5 text-[#1a1a1a]">{title}</h3>
       <p className="text-[13px] text-[#777] leading-[1.7]">{desc}</p>
-      <div className="inline-flex items-center gap-1.5 mt-4 text-[11px] font-medium text-[#888] bg-[#FFF7ED] px-3 py-1 rounded-full">
+      <div className="flex items-center mt-4 text-[11px] font-semibold text-[#666] project-award" style={{borderTop: '1px solid var(--color-border-subtle)', paddingTop: '16px', marginTop: '16px'}}>
         {award}
       </div>
     </div>

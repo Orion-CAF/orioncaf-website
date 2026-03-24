@@ -8,7 +8,7 @@ export default function Footer({ dict }: { dict: any }) {
       <div className="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-12 px-6 md:px-16 max-w-[1200px] mx-auto">
         <div className="md:col-span-2">
           <div className="text-[17px] font-bold flex items-center gap-2.5 mb-3 text-[#1a1a1a]">
-            <div className="w-2.5 h-2.5 rounded-full bg-accent"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-[#4F46E5] footer-brand-dot"></div>
             OrionCAF
           </div>
           <div className="text-[13px] text-[#999] leading-[1.7] max-w-[240px]">

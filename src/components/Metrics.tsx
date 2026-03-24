@@ -60,7 +60,7 @@ function MetricItem({ end, suffix, label, hasBorder }: { end: number; suffix: st
   return (
     <div
       ref={ref}
-      className={`text-center flex-1 w-[45%] md:w-auto md:max-w-[220px] px-6 mb-6 md:mb-0 ${hasBorder ? 'border-r-0 md:border-r border-black/[0.06]' : ''}`}
+      className={`text-center flex-1 w-[45%] md:w-auto md:max-w-[220px] px-6 mb-6 md:mb-0 metric ${hasBorder ? 'border-r-0 md:border-r border-black/[0.06]' : ''}`}
     >
       <div className="text-[34px] md:text-[40px] font-bold tracking-[-1px] text-[#1a1a1a] metric-number">
         <span className="text-accent">{value}</span>{suffix}

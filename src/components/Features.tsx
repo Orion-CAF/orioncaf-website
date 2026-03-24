@@ -19,7 +19,7 @@ export default function Features({ dict }: { dict: any }) {
             {dict.core.btn}
           </a>
         </div>
-        <div className="bg-white border border-black/[0.06] rounded-2xl p-7 md:p-8">
+        <div className="feature-visual rounded-2xl p-7 md:p-8">
           <div className="text-[11px] font-bold text-[#999] uppercase tracking-[.1em] mb-4">
             {dict.core.pipeline}
           </div>
@@ -69,7 +69,7 @@ export default function Features({ dict }: { dict: any }) {
             {dict.turkish.btn}
           </a>
         </div>
-        <div className="bg-white border border-black/[0.06] rounded-2xl p-7 md:p-8 md:order-1">
+        <div className="feature-visual rounded-2xl p-7 md:p-8 md:order-1">
           <div className="text-[11px] font-bold text-[#999] uppercase tracking-[.1em] mb-4">
             {dict.turkish.results}
           </div>

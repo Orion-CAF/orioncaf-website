@@ -3,7 +3,7 @@ import { dispatchContactModal } from "./ContactModal";
 
 export default function CtaBanner({ dict }: { dict: any }) {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-accent to-[#6B9B2A] rounded-3xl p-12 md:py-16 md:px-16 text-center mx-6 md:mx-16 mb-24 max-w-[1200px] xl:mx-auto">
+    <div className="cta-banner rounded-3xl p-12 md:py-16 md:px-16 text-center mx-6 md:mx-16 mb-24 max-w-[1200px] xl:mx-auto">
       {/* Decorative circles */}
       <div className="absolute top-[-60px] right-[-60px] w-[200px] h-[200px] rounded-full bg-white/[0.06]" />
       <div className="absolute bottom-[-40px] left-[-40px] w-[160px] h-[160px] rounded-full bg-white/[0.04]" />

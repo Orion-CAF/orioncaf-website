@@ -50,9 +50,9 @@ function ServiceCard({ title, desc, linkText, icon }: { title: string; desc: str
   return (
     <div
       onClick={dispatchContactModal}
-      className="animate-child card-hover group bg-white border border-black/[0.06] rounded-2xl p-7 transition-all duration-250 cursor-pointer hover:border-accent/30 hover:shadow-[0_0_0_3px_rgba(73,125,21,0.06)]"
+      className="animate-child card-hover service-card group bg-white border border-black/[0.06] rounded-2xl p-7 transition-all duration-300 cursor-pointer hover:border-accent/30 hover:shadow-[0_0_0_3px_rgba(73,125,21,0.06)]"
     >
-      <div className="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center mb-5">
+      <div className="w-10 h-10 rounded-xl service-icon flex items-center justify-center mb-5 transition-all">
         <div className="w-[18px] h-[18px]">
           {icon}
         </div>
