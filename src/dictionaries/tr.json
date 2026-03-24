@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "solutions": "Çözümler",
+    "projects": "Projeler",
+    "research": "Araştırma",
+    "about": "Hakkımızda",
+    "contact": "Bize ulaşın →"
+  },
+  "hero": {
+    "badge": "Türkiye'den Yapay Zeka odaklı mühendislik",
+    "title1": "Daha akıllı sistemler inşa edin:",
+    "title2": "",
+    "titleHighlight": "Çalışan Yapay Zeka",
+    "desc": "Uçtan uca ses (Speech to speech) boru hatları, LLM eğitimi, RAG sistemleri ve akıllı otomasyon — üretim ortamları için tasarlandı, endüstrinize özel optimize edildi.",
+    "start": "Projeye başla",
+    "work": "İşlerimizi görün"
+  },
+  "metrics": {
+    "engineers": "Teslim edilen AI projesi",
+    "downloads": "Hugging Face model indirmesi",
+    "users": "Aktif uygulama kullanıcısı (organik)",
+    "publications": "Hakemli yayın (2025)"
+  },
+  "services": {
+    "tag": "Neler inşa ediyoruz",
+    "title": "Tüm katmanlarda Yapay Zeka çözümleri",
+    "desc": "Ses modellerinden kurumsal otomasyonlara kadar — üretimde sorunsuz çalışan sistemler tasarlıyor, eğitiyor ve devreye alıyoruz.",
+    "docs": "Daha fazla bilgi →",
+    "items": [
+      { "title": "n8n Otomasyonları", "desc": "Uçtan uca kodsuz yapay zeka iş akışları — veri hatlarından müşteri odaklı ajanlara. Operasyonlarınızı ölçeklenebilir şekilde otomatikleştirin." },
+      { "title": "Yapay Zeka Ses Sistemleri", "desc": "Uçtan uca gerçek zamanlı sesli yapay zeka — Whisper ASR, özel TTS, LLM akıl yürütme. Saniyenin altında gecikme, üretime hazır boru hatları." },
+      { "title": "LLM İnce Ayar", "desc": "LoRA, 4-bit nicemleme ve Unsloth ile alana özel model eğitimi. Donanımdan bağımsız dağıtım — bulut, şirket içi veya uç cihaz." },
+      { "title": "RAG & Bilgi Sistemleri", "desc": "Özel verileriniz üzerinde güvenli, çevrimdışı erişim artırılmış üretim. FAISS, Pinecone, anlamsal yeniden sıralama, güvenlik katmanları." },
+      { "title": "Yapay Zeka Otomasyonu (n8n)", "desc": "API'lerinizi, veritabanlarınızı ve yapay zeka modellerinizi birbirine bağlayan akıllı iş akışı otomasyonu." },
+      { "title": "Mobil Uygulama Geliştirme", "desc": "Yapay zeka destekli iOS ve Android uygulamaları — fikirden App Store'a. Gömülü zeka ile ürünler inşa ediyoruz." },
+      { "title": "Yapay Zeka Mimari & Danışmanlık", "desc": "Sistem tasarımı, teknoloji yol haritası, model seçimi ve şirket içi GPU dağıtımı. Doğru çözümü inşa etmenize yardımcı oluyoruz." }
+    ]
+  },
+  "features": {
+    "core": {
+      "tag": "Temel yetenek",
+      "title": "Saniyenin altında gecikmeyle gerçek zamanlı Sesli Yapay Zeka",
+      "desc": "Türkçe ve İngilizce anlayan, akıl yürüten ve yanıt veren uçtan uca sesli asistanlar. ASR'den TTS'e kadar merkezinde LLM bulunan çözümler.",
+      "bullets": [
+        "Türkçe ASR için ince ayar yapılmış Whisper Large v3",
+        "Tüm Türkçe modellerle (LLM, TS, STT) özel TTS ve PiperTTS ses klonlama",
+        "LiveKit / Pipecat tabanlı gerçek zamanlı iletişim katmanı",
+        "RunPod, şirket içi A100/H100 veya sunucusuz mimarilere dağıtılabilir"
+      ],
+      "btn": "Teknik detayları gör →",
+      "pipeline": "Boru Hatları (Pipeline)",
+      "latency": "Gecikme hedefleri",
+      "total": "Toplam",
+      "audioIn": "Ses Girişi",
+      "mic": "Mikrofon / Akış",
+      "reasoning": "Akıl Yürütme",
+      "ttsModels": "Türkçe Modeller",
+      "audioOut": "Ses Çıkışı",
+      "speaker": "Hoparlör"
+    },
+    "turkish": {
+      "tag": "Türkçe AI",
+      "title": "Yerel LLM'ler. Önceliğimiz Türkçe. Verileriniz sunucunuzda kalır.",
+      "desc": "Hukuk, tarım, eğitim ve kurumsal alanlar için dil modellerini eğitiyor ve Türkçe'ye optimize ediyoruz. Gizlilik gerektiğinde her şey yerel sunucunuzda çalışır.",
+      "bullets": [
+        "Doğruluk kaybı olmadan 4-bit nicemleme (INT4/INT8)",
+        "Verimli eğitim için Unsloth destekli LoRA",
+        "Hugging Face üzerinde açık kaynaklı Türkçe modeller (1000+ indirme)",
+        "2025 yılında yayımlanan hakemli araştırma"
+      ],
+      "btn": "Modellerimizi görün →",
+      "results": "Optimizasyon Sonuçları",
+      "metrics": [
+        { "title": "TTS kalite iyileştirmesi", "sub": "İnce ayar ve hata analizi ile", "num": "+30%" },
+        { "title": "RAG yanıt doğruluğu", "sub": "Retriever + yeniden sıralayıcı + anlamsal önbellek", "num": "+50%" },
+        { "title": "ASR performans artışı", "sub": "Türkçe için Whisper ince ayarı", "num": "+20%" }
+      ]
+    }
+  },
+  "projects": {
+    "tag": "İşler",
+    "title": "Seçili Projeler",
+    "desc": "Yüksek etkili müşteri projelerinden, binlerce kez indirilen açık kaynak modellere kadar.",
+    "items": [
+      { "tag": "Ses AI", "title": "Tüm Türkçe Modeller (LLM, TS, STT)", "desc": "Ses klonlama ile Türkçe metin okuma. Hugging Face'te yayınlandı — topluluk tarafından 1000+ indirme.", "award": "Hugging Face · Açık kaynak" },
+      { "tag": "LLM · RAG", "title": "Hukuki LLM Sohbet Botu", "desc": "Belge indeksleme, anlamsal arama ve güvenlik katmanlarıyla erişim artırılmış hukuki soru-cevap sistemi.", "award": "Öne çıkan proje" },
+      { "tag": "Yapay Zeka Ajanları", "title": "Kurumsal Ar-Ge Ajan Sistemi", "desc": "Havacılık ve savunma endüstrileri için araştırma makaleleri ve patentleri tarayarak Ar-Ge fikirleri öneren otonom ajanlar.", "award": "Kurumsal iş birliği" },
+      { "tag": "Mobil", "title": "LawBuddy", "desc": "Hukuk öğrencileri için analitik ve ilerleme içgörüleri sunan mobil uygulama. Tamamen organik büyümeyle 600+ aktif kullanıcıya ulaştı.", "award": "600+ kullanıcı" },
+      { "tag": "Web · AI", "title": "AI Pulse", "desc": "Arxiv, Hugging Face ve teknoloji bloglarından gerçek zamanlı yapay zeka haber toplayıcı ve dahili özetleme aracı.", "award": "Canlı ürün" },
+      { "tag": "Ses AI · RAG", "title": "Gerçek Zamanlı Sesli Yapay Zeka Asistanı", "desc": "Akış sesi, bağlama duyarlı yanıtlar için RAG ve optimize edilmiş uçtan uca gecikme ile tam yığın sesli yapay zeka.", "award": "Saniye altı boru hattı" },
+      { "tag": "AI Otomasyon · n8n", "title": "Kurumsal Operasyon Ajanı", "desc": "n8n ve LLM destekli akıllı operasyon yönetimi ajanı. Fiyatlandırma, iletişim ve iş akışı orkestrasyonunu otomatikleştirir.", "award": "n8n · LLM destekli" }
+    ]
+  },
+  "research": {
+    "tag": "Araştırma",
+    "title": "Hakemli Yayınlar",
+    "paperTitle": "Türkçe LLM'lerde Nicemleme Telafisi: Doğruluk, Hız ve Bellek Kullanımı Değerlendirmesi",
+    "paperAuthor": "OrionCAF Araştırma · 2025",
+    "paperJournal": "Veri Bilimi, 8(2), 70–80 · Hakemli"
+  },
+  "cta": {
+    "title": "Yapay Zeka ile inşa etmeye hazır mısınız?",
+    "desc": "Bize projenizden bahsedin. Doğru sistem mimarisini tasarlayıp, hayata geçirelim.",
+    "start": "İletişime geçin",
+    "explore": "Hizmetleri keşfedin"
+  },
+  "contactModal": {
+    "title": "Bize ulaşın",
+    "desc": "Projeniz hakkında bilgi verin. Genellikle 24 saat içinde yanıt veriyoruz.",
+    "name": "İsim",
+    "namePlaceholder": "Adınız",
+    "email": "E-posta",
+    "emailPlaceholder": "siz@sirket.com",
+    "message": "Mesaj",
+    "messagePlaceholder": "Projenizi veya sorunuzu açıklayın...",
+    "send": "Mesaj Gönder",
+    "sending": "Gönderiliyor...",
+    "sentTitle": "Mesaj gönderildi",
+    "sentDesc": "24 saat içinde size dönüş yapacağız.",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin."
+  },
+  "footer": {
+    "tagline": "Yapay Zeka Mühendisliği — ses, dil ve otomasyon. Türkiye'de inşa edildi, dünyaya sunuldu.",
+    "solutions": "Çözümler",
+    "company": "Şirket",
+    "connect": "Bağlantılar",
+    "about": "Hakkımızda",
+    "projects": "Projeler",
+    "research": "Araştırma",
+    "opensource": "Açık Kaynak",
+    "contact": "İletişim",
+    "solutionLinks": ["Sesli Yapay Zeka", "LLM İnce Ayar", "RAG Sistemleri", "Yapay Zeka Otomasyonu", "Mobil & Web"],
+    "copyright": "© 2025 OrionCAF. Tüm hakları saklıdır.",
+    "builtMsg": "Açık kaynak yapay zeka ile geliştirildi"
+  }
+}

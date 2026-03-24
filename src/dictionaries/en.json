@@ -1,0 +1,137 @@
+{
+  "nav": {
+    "solutions": "Solutions",
+    "projects": "Projects",
+    "research": "Research",
+    "about": "About",
+    "contact": "Contact us →"
+  },
+  "hero": {
+    "badge": "AI first engineering from Turkey",
+    "title1": "Build smarter systems",
+    "title2": "with ",
+    "titleHighlight": "AI that actually works",
+    "desc": "Speech to speech pipelines, LLM fine tuning, RAG systems, and intelligent automation — designed for production, optimized for your industry.",
+    "start": "Start a project",
+    "work": "See our work"
+  },
+  "metrics": {
+    "engineers": "AI projects delivered",
+    "downloads": "Hugging Face model downloads",
+    "users": "Active app users (organic)",
+    "publications": "Peer reviewed publication (2025)"
+  },
+  "services": {
+    "tag": "What we build",
+    "title": "AI solutions across the full stack",
+    "desc": "From voice pipelines to enterprise automation — we design, train, and deploy systems that run in production.",
+    "docs": "Learn more →",
+    "items": [
+      { "title": "n8n Automations", "desc": "End to end no code AI workflows — from data pipelines to customer facing agents. Automate operations at scale." },
+      { "title": "AI Speech to Speech", "desc": "End to end real time voice AI — Whisper ASR, custom TTS, LLM reasoning. Sub second latency, production ready pipelines." },
+      { "title": "LLM Fine Tuning", "desc": "Domain specific model training with LoRA, 4 bit quantization, and Unsloth. Hardware agnostic deployment — cloud, on prem, or edge." },
+      { "title": "RAG & Knowledge Systems", "desc": "Secure, offline retrieval augmented generation over your private data. FAISS, Pinecone, semantic reranking, guardrails." },
+      { "title": "AI Automation (n8n)", "desc": "Intelligent workflow automation connecting your APIs, databases, and AI models. No ops pipelines that run themselves." },
+      { "title": "Mobile App Development", "desc": "AI powered iOS & Android apps — from idea to App Store. We build and ship products with embedded intelligence." },
+      { "title": "AI Architecture & Consulting", "desc": "System design, tech roadmap, model selection, and on prem GPU deployment. We help you build the right thing, right." }
+    ]
+  },
+  "features": {
+    "core": {
+      "tag": "Core capability",
+      "title": "Real time speech AI with sub second latency",
+      "desc": "We build full stack voice agents that understand, reason, and respond — in Turkish and English. From ASR to TTS with LLM at the core.",
+      "bullets": [
+        "Whisper Large v3 fine tuned for Turkish ASR",
+        "Custom TTS with all of Turkish models (LLM, TS, STT) and PiperTTS voice cloning",
+        "LiveKit powered real time communication layer",
+        "Pipecat powered real time communication layer",
+        "Deployable on RunPod, on prem A100/H100, or serverless"
+      ],
+      "btn": "See technical details →",
+      "pipeline": "Pipeline",
+      "latency": "Latency targets",
+      "total": "Total",
+      "audioIn": "Audio in",
+      "mic": "Mic / stream",
+      "reasoning": "Reasoning",
+      "ttsModels": "Turkish models",
+      "audioOut": "Audio out",
+      "speaker": "Speaker"
+    },
+    "turkish": {
+      "tag": "Turkish AI",
+      "title": "Local LLMs. Turkish first. No data leaves your server.",
+      "desc": "We train and optimize language models for Turkish — for law, agriculture, education, and enterprise. Everything runs on prem when privacy demands it.",
+      "bullets": [
+        "4 bit quantization (INT4/INT8) without accuracy loss",
+        "LoRA fine tuning with Unsloth for efficient training",
+        "Open source Turkish models on Hugging Face (1000+ downloads)",
+        "Peer reviewed research published in 2025"
+      ],
+      "btn": "View our models →",
+      "results": "Optimization results",
+      "metrics": [
+        { "title": "TTS quality improvement", "sub": "Via fine tuning and error analysis", "num": "+30%" },
+        { "title": "RAG response accuracy", "sub": "Retriever + reranker + semantic cache", "num": "+50%" },
+        { "title": "ASR performance gain", "sub": "Whisper fine tuning for Turkish", "num": "+20%" }
+      ]
+    }
+  },
+  "projects": {
+    "tag": "Work",
+    "title": "Selected projects",
+    "desc": "From high impact projects to open source models with thousands of downloads.",
+    "items": [
+      { "tag": "Speech AI", "title": "All of Turkish models (LLM, TS, STT)", "desc": "Turkish text to speech with voice cloning. Published on Hugging Face — 1000+ downloads by the community.", "award": "Hugging Face · Open source" },
+      { "tag": "LLM · RAG", "title": "Legal LLM Chatbot", "desc": "Retrieval augmented legal Q&A system with document indexing, semantic search, and guardrails.", "award": "Featured project" },
+      { "tag": "AI Agents", "title": "Enterprise R&D Agent System", "desc": "Autonomous agents scanning research papers and patents to propose actionable R&D ideas for aerospace and defense industries.", "award": "Enterprise collaboration" },
+      { "tag": "Mobile", "title": "LawBuddy", "desc": "Mobile app for law students with analytics and progress insights. Grew to 600+ active users entirely through organic reach.", "award": "600+ users" },
+      { "tag": "Web · AI", "title": "AI Pulse", "desc": "Real time AI news aggregator from Arxiv, Hugging Face, and tech blogs with a built in AI summarization tool.", "award": "Live product" },
+      { "tag": "Speech AI · RAG", "title": "Real Time Voice AI Assistant", "desc": "Full stack voice AI with streaming audio, RAG for context aware responses, and optimized end to end latency.", "award": "Sub second pipeline" },
+      { "tag": "AI Automation · n8n", "title": "Enterprise Operations Agent", "desc": "Intelligent operations management agent powered by n8n and LLM. Automates pricing, communication, and workflow orchestration.", "award": "n8n · LLM powered" }
+    ]
+  },
+  "research": {
+    "tag": "Research",
+    "title": "Peer reviewed publication",
+    "paperTitle": "Quantization Compensation in Turkish LLMs: An Evaluation of Accuracy, Speed, and Memory Usage",
+    "paperAuthor": "OrionCAF Research · 2025",
+    "paperJournal": "Veri Bilimi, 8(2), 70–80 · Peer Reviewed"
+  },
+  "cta": {
+    "title": "Ready to build with AI?",
+    "desc": "Tell us about your project. We'll design the right system architecture and get it into production.",
+    "start": "Start a conversation",
+    "explore": "Explore services"
+  },
+  "contactModal": {
+    "title": "Get in touch",
+    "desc": "Tell us about your project. We typically respond within 24 hours.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "you@company.com",
+    "message": "Message",
+    "messagePlaceholder": "Describe your project or question...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "sentTitle": "Message sent",
+    "sentDesc": "We'll get back to you within 24 hours.",
+    "error": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "tagline": "AI engineering — speech, language, automation, and beyond. Built in Turkey, deployed globally.",
+    "solutions": "Solutions",
+    "company": "Company",
+    "connect": "Connect",
+    "about": "About",
+    "projects": "Projects",
+    "research": "Research",
+    "opensource": "Open Source",
+    "contact": "Contact",
+    "solutionLinks": ["Speech to Speech AI", "LLM Fine Tuning", "RAG Systems", "AI Automation", "Mobile & Web"],
+    "copyright": "© 2025 OrionCAF. All rights reserved.",
+    "builtMsg": "Built on open source AI"
+  }
+}
