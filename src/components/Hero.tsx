@@ -1,43 +1,68 @@
 "use client";
+import { useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import { dispatchContactModal } from "./ContactModal";
+import ThreeHeroCanvas from "./ThreeHeroCanvas";
+import { RainbowButton } from "./ui/rainbow-button";
 
-export default function Hero({ dict }: { dict: any }) {
+export default function Hero({ dict, lang }: { dict: any; lang?: string }) {
+  const pathname = usePathname();
+
+  const runAnimations = useCallback(() => {
+    if (typeof window === "undefined") return;
+    const items = document.querySelectorAll(".hero-stagger-item");
+    items.forEach(el => {
+      (el as HTMLElement).style.opacity = "0";
+      (el as HTMLElement).style.transform = "translateY(30px)";
+    });
+
+    const tryAnimate = () => {
+      if ((window as any).anime) {
+        (window as any).anime.remove(".hero-stagger-item");
+        (window as any).anime({
+          targets: ".hero-stagger-item",
+          translateY: [30, 0],
+          opacity: [0, 1],
+          duration: 800,
+          delay: (window as any).anime.stagger(150, { start: 300 }),
+          easing: "easeOutExpo"
+        });
+      } else {
+        items.forEach(el => {
+          (el as HTMLElement).style.opacity = "1";
+          (el as HTMLElement).style.transform = "translateY(0)";
+        });
+      }
+    };
+    setTimeout(tryAnimate, 100);
+  }, []);
+
+  useEffect(() => {
+    runAnimations();
+  }, [dict, runAnimations]);
+
   return (
-    <section className="relative text-center px-6 md:px-16 pt-20 md:pt-28 pb-16 md:pb-24 max-w-[860px] mx-auto overflow-hidden">
-      {/* Animated floating orbs */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="hero-orb absolute w-[360px] h-[360px] rounded-full bg-[radial-gradient(circle,rgba(73,125,21,0.10),transparent_70%)] top-[-80px] left-[-100px] animate-[float1_14s_ease-in-out_infinite]" />
-        <div className="hero-orb absolute w-[280px] h-[280px] rounded-full bg-[radial-gradient(circle,rgba(45,90,14,0.08),transparent_70%)] top-[10px] right-[-80px] animate-[float2_18s_ease-in-out_infinite]" />
-        <div className="hero-orb absolute w-[220px] h-[220px] rounded-full bg-[radial-gradient(circle,rgba(73,125,21,0.06),transparent_70%)] bottom-[-50px] left-[30%] animate-[float3_16s_ease-in-out_infinite]" />
-      </div>
-      {/* Dot grid pattern */}
-      <div className="absolute inset-0 -z-10 opacity-[0.3] bg-[radial-gradient(circle,rgba(73,125,21,0.15)_1px,transparent_1px)] bg-[size:28px_28px]"></div>
+    <section className="relative text-center px-6 md:px-16 pt-20 md:pt-28 pb-16 md:pb-24 min-h-[85vh] flex flex-col items-center justify-center w-full overflow-hidden">
+      <ThreeHeroCanvas key={`${lang}-${pathname}`} langKey={lang} />
 
-      <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-accent px-4 py-1.5 rounded-full mb-8 shadow-sm" style={{background: 'linear-gradient(135deg, #EEF2FF, #E0E7FF)'}}>
-        <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></div>
-        {dict.badge}
-      </div>
+      <div className="relative z-10 flex flex-col items-center w-full mt-[10vh]">
+        <div className="relative z-10">
+          <div className="text-bg-anim absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[150%] bg-[radial-gradient(ellipse,rgba(73,125,21,0.08),transparent_60%)] -z-10 pointer-events-none rounded-[100%] blur-[20px]"></div>
+          <h1 className="hero-stagger-item text-[32px] md:text-[42px] font-bold leading-[1.2] tracking-[-1px] text-[#1a1a1a] mb-6 drop-shadow-sm mt-48">
+            {dict.title1}<br />
+            {dict.title2}<em className="not-italic text-[#497D15] font-extrabold">{dict.titleHighlight}</em>
+          </h1>
+        </div>
 
-      <div className="relative z-10">
-        {/* Dynamic Text Background Animation Orb */}
-        <div className="text-bg-anim absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[150%] bg-[radial-gradient(ellipse,rgba(73,125,21,0.08),transparent_60%)] -z-10 pointer-events-none rounded-[100%] blur-[20px]"></div>
-        
-        <h1 className="text-[38px] md:text-[56px] font-bold leading-[1.08] tracking-[-2px] text-[#1a1a1a] mb-6">
-          {dict.title1}<br />
-          {dict.title2} <em className="not-italic text-[#497D15] drop-shadow-sm">{dict.titleHighlight}</em>
-        </h1>
-      </div>
+        <p className="hero-stagger-item text-[16px] md:text-[19px] text-[#555] leading-[1.7] max-w-[650px] mx-auto mb-10 font-medium">
+          {dict.desc}
+        </p>
 
-      <p className="text-[16px] md:text-[18px] text-[#666] leading-[1.7] max-w-[600px] mx-auto mb-10">
-        {dict.desc}
-      </p>
-      <div className="flex flex-wrap gap-3.5 justify-center">
-        <button onClick={dispatchContactModal} className="text-[14px] font-semibold px-7 py-3.5 rounded-full bg-accent text-white hover:bg-accent-hover hover:shadow-[0_6px_20px_rgba(73,125,21,0.3)] active:scale-[0.97] transition-all duration-200 cursor-pointer font-sans border-none">
-          {dict.start}
-        </button>
-        <a href="#projects" className="text-[14px] font-semibold px-7 py-3.5 rounded-full bg-transparent text-[#1a1a1a] border border-black/15 hover:bg-white hover:border-black/25 hover:shadow-sm active:scale-[0.97] transition-all duration-200 cursor-pointer font-sans no-underline inline-block">
-          {dict.work}
-        </a>
+        <div className="hero-stagger-item flex flex-wrap gap-4 justify-center">
+          <RainbowButton onClick={dispatchContactModal}>
+            {dict.start}
+          </RainbowButton>
+        </div>
       </div>
     </section>
   );

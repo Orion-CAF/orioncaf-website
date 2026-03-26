@@ -18,7 +18,10 @@ export default function ScrollReveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add("is-visible");
-          observer.unobserve(el);
+        } else {
+          // Remove class when scrolling out of view so it can animate again when scrolling back
+          // or when navigating back to the page
+          el.classList.remove("is-visible");
         }
       },
       { threshold: 0.12 }

@@ -1,13 +1,12 @@
 import { getDictionary } from "@/app/dictionaries";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Metrics from "@/components/Metrics";
 import Services from "@/components/Services";
 import Features from "@/components/Features";
 import Projects from "@/components/Projects";
-import Research from "@/components/Research";
+import CustomerSlider from "@/components/CustomerSlider";
+import ResourcesGrid from "@/components/ResourcesGrid";
 import CtaBanner from "@/components/CtaBanner";
-import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export default async function Home({ params }: { params: Promise<{ lang: 'en' | 'tr' }> }) {
@@ -16,9 +15,8 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
 
   return (
     <>
-      <Navbar dict={dict.nav} lang={lang} contactDict={dict.contactModal} />
       <ScrollReveal>
-        <Hero dict={dict.hero} />
+        <Hero dict={dict.hero} lang={lang} />
       </ScrollReveal>
       <ScrollReveal>
         <Metrics dict={dict.metrics} />
@@ -33,12 +31,14 @@ export default async function Home({ params }: { params: Promise<{ lang: 'en' | 
         <Projects dict={dict.projects} />
       </ScrollReveal>
       <ScrollReveal>
-        <Research dict={dict.research} />
+        <CustomerSlider lang={lang} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <ResourcesGrid lang={lang} />
       </ScrollReveal>
       <ScrollReveal>
         <CtaBanner dict={dict.cta} />
       </ScrollReveal>
-      <Footer dict={dict.footer} />
     </>
   );
 }

@@ -1,15 +1,24 @@
 "use client";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import ContactModal from "./ContactModal";
+import { MegaMenu } from "./ui/mega-menu";
+import type { MegaMenuItem } from "./ui/mega-menu";
+import { AnimatedThemeToggle } from "./ui/animated-theme-toggle";
+import { RainbowButton } from "./ui/rainbow-button";
+import {
+  Cpu, Globe, Mic, BookOpen, BrainCircuit, Smartphone, Server,
+  FileText, Newspaper, Users, Rocket, Search, Shield, Box, Palette
+} from "lucide-react";
 
-const sections = ["solutions", "projects", "research", "about"] as const;
+const solutionIcons = [Cpu, Mic, BrainCircuit, BookOpen, Shield, Smartphone, Server];
+const projectIcons = [Globe, FileText, Rocket, Search, Newspaper, Mic, Box, Palette];
 
 export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: string; contactDict: any }) {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -17,24 +26,6 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const updateActive = useCallback(() => {
-    const offset = 120;
-    let current = "";
-    for (const id of sections) {
-      const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= offset) {
-        current = id;
-      }
-    }
-    setActiveSection(current);
-  }, []);
-
-  useEffect(() => {
-    updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    return () => window.removeEventListener("scroll", updateActive);
-  }, [updateActive]);
 
   useEffect(() => {
     if (!isMobileOpen) return;
@@ -48,16 +39,71 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
     return () => { document.body.style.overflow = ""; };
   }, [isMobileOpen]);
 
-  const labels: Record<string, string> = {
-    solutions: dict.solutions,
-    projects: dict.projects,
-    research: dict.research,
-    about: dict.about,
+  const handleSolutionClick = (productName: string) => {
+    setSelectedProduct(productName);
+    setIsContactOpen(true);
+    setIsMobileOpen(false);
   };
+
+  const navItems: MegaMenuItem[] = [
+    {
+      id: 1,
+      label: dict.solutions,
+      subMenus: [{
+        title: dict.solutions,
+        items: (dict.solutionsMenu || []).map((item: string, i: number) => ({
+          label: item, description: "",
+          icon: solutionIcons[i % solutionIcons.length],
+          onClick: () => handleSolutionClick(item),
+        })),
+      }],
+    },
+    {
+      id: 2,
+      label: dict.projects,
+      subMenus: [{
+        title: dict.projects,
+        items: (dict.projectsMenu || []).map((item: any, i: number) => ({
+          label: item.label, description: "",
+          icon: projectIcons[i % projectIcons.length],
+          href: `/${lang}/projects/${item.slug}`,
+        })),
+      }],
+    },
+    {
+      id: 3,
+      label: dict.research,
+      subMenus: [{
+        title: dict.research,
+        items: (dict.researchMenu || []).map((item: any) => ({
+          label: item.label, description: "",
+          icon: BookOpen,
+          href: `/${lang}${item.href}`,
+        })),
+      }],
+    },
+    {
+      id: 4,
+      label: dict.about,
+      subMenus: [{
+        title: dict.about,
+        items: (dict.aboutMenu || []).map((item: any) => ({
+          label: item.label, description: "",
+          icon: Users,
+          href: `/${lang}${item.href}`,
+        })),
+      }],
+    },
+    {
+      id: 5,
+      label: dict.pricing,
+      onClick: () => { window.location.href = `/${lang}/pricing`; },
+    },
+  ];
 
   return (
     <>
-      <nav className={`sticky top-0 z-[100] flex items-center justify-between px-6 md:px-16 h-[72px] bg-[#FFF7ED]/95 backdrop-blur-lg border-b border-black/[0.06] transition-all duration-300 ${scrolled ? 'shadow-[0_2px_16px_rgba(0,0,0,0.06)]' : ''}`}>
+      <nav className={`fixed w-full top-0 z-[100] flex items-center justify-between px-6 md:px-16 h-[72px] bg-[#FFF7ED]/95 backdrop-blur-lg border-b border-black/[0.06] transition-all duration-300 ${scrolled ? 'shadow-[0_2px_16px_rgba(0,0,0,0.06)]' : ''}`}>
         <Link href={`/${lang}`} className="flex items-center gap-2 text-[17px] font-bold tracking-tight text-[#1a1a1a] no-underline">
           <svg className="orion-logo-svg" viewBox="0 0 160 30" width="120" height="22">
             <g transform="translate(0, 20)">
@@ -69,33 +115,24 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
               </text>
             </g>
           </svg>
-          <span style={{fontSize:'10px',fontWeight:500,color:'var(--color-accent)',background:'#EEF2FF',padding:'2px 8px',borderRadius:'99px',letterSpacing:'0.05em', whiteSpace: 'nowrap'}}>AI Engineering</span>
         </Link>
 
-
-        <div className="hidden md:flex gap-8">
-          {sections.map((id) => (
-            <Link
-              key={id}
-              href={`#${id}`}
-              className={`text-[14px] transition-all duration-200 no-underline ${
-                activeSection === id
-                  ? 'text-accent font-semibold'
-                  : 'text-[#555] hover:text-[#1a1a1a]'
-              }`}
-            >
-              {labels[id]}
-            </Link>
-          ))}
+        {/* DESKTOP NAV */}
+        <div className="hidden md:flex items-center gap-0 h-full">
+          <MegaMenu items={navItems} />
         </div>
 
-        <div className="flex items-center gap-5">
+        {/* RIGHT ACTIONS */}
+        <div className="flex items-center gap-3">
+          <AnimatedThemeToggle />
           <Link href={lang === 'tr' ? '/en' : '/tr'} className="text-[13px] font-semibold text-[#555] hover:text-[#1a1a1a] cursor-pointer uppercase transition-colors duration-200">
             {lang === 'tr' ? 'EN' : 'TR'}
           </Link>
-          <button onClick={() => setIsContactOpen(true)} className="hidden md:inline-flex text-[13px] font-semibold px-5 py-2.5 rounded-full border-none bg-accent text-white hover:bg-accent-hover font-sans transition-all duration-200 cursor-pointer hover:shadow-[0_4px_12px_rgba(73,125,21,0.25)]">
-            {dict.contact}
-          </button>
+          <div className="hidden md:block">
+            <RainbowButton onClick={() => { setSelectedProduct(""); setIsContactOpen(true); }}>
+              {dict.contact}
+            </RainbowButton>
+          </div>
 
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -109,53 +146,57 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
         </div>
       </nav>
 
+      {/* MOBILE NAV OVERLAY */}
       <div
-        className={`fixed inset-0 z-[99] bg-black/25 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMobileOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        className={`fixed inset-0 z-[98] bg-black/25 backdrop-blur-sm transition-opacity duration-300 md:hidden ${isMobileOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         onClick={() => setIsMobileOpen(false)}
       />
 
-      <div className={`fixed top-[72px] right-0 z-[99] w-[300px] h-[calc(100dvh-72px)] bg-[#FFF7ED] border-l border-black/[0.06] shadow-2xl transition-transform duration-300 ease-out md:hidden ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col px-7 pt-8 pb-8 h-full">
-          <div className="flex flex-col gap-1">
-            {sections.map((id) => (
-              <MobileNavLink
-                key={id}
-                href={`#${id}`}
-                active={activeSection === id}
-                onClick={() => setIsMobileOpen(false)}
-              >
-                {labels[id]}
-              </MobileNavLink>
-            ))}
+      <div className={`fixed top-[72px] right-0 z-[99] w-[300px] h-[calc(100dvh-72px)] bg-[#FFF7ED] border-l border-black/[0.06] shadow-2xl transition-transform duration-300 ease-out md:hidden overflow-y-auto ${isMobileOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col px-7 pt-8 pb-8">
+          <div className="flex flex-col gap-6">
+            <MobileAccordion label={dict.solutions}>
+              {dict.solutionsMenu?.map((item: string, i: number) => (
+                <button key={i} onClick={() => handleSolutionClick(item)} className="mobile-sublink">{item}</button>
+              ))}
+            </MobileAccordion>
+
+            <MobileAccordion label={dict.projects}>
+              {dict.projectsMenu?.map((item: any, i: number) => (
+                <Link key={i} href={`/${lang}/projects/${item.slug}`} className="mobile-sublink" onClick={() => setIsMobileOpen(false)}>{item.label}</Link>
+              ))}
+            </MobileAccordion>
+            
+            <MobileAccordion label={dict.research}>
+              {dict.researchMenu?.map((item: any, i: number) => (
+                <Link key={i} href={`/${lang}${item.href}`} className="mobile-sublink" onClick={() => setIsMobileOpen(false)}>{item.label}</Link>
+              ))}
+            </MobileAccordion>
+
+            <Link href={`/${lang}/pricing`} onClick={() => setIsMobileOpen(false)} className="text-[16px] font-bold text-[#1a1a1a] py-2 border-b border-black/5">
+              {dict.pricing}
+            </Link>
           </div>
-          <div className="border-t border-black/[0.06] mt-6 pt-6">
-            <button
-              onClick={() => { setIsMobileOpen(false); setIsContactOpen(true); }}
-              className="w-full text-[14px] font-semibold py-3.5 rounded-full border-none bg-accent text-white hover:bg-accent-hover font-sans transition-all duration-200 cursor-pointer"
-            >
+          <div className="mt-8 pt-6">
+            <RainbowButton onClick={() => { setIsMobileOpen(false); setSelectedProduct(""); setIsContactOpen(true); }} className="w-full">
               {dict.contact}
-            </button>
+            </RainbowButton>
           </div>
         </div>
       </div>
 
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} dict={contactDict} />
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} dict={contactDict} initialProduct={selectedProduct} />
     </>
   );
 }
 
-function MobileNavLink({ href, active, onClick, children }: { href: string; active: boolean; onClick: () => void; children: React.ReactNode }) {
+function MobileAccordion({ label, children }: { label: string, children: React.ReactNode }) {
   return (
-    <a
-      href={href}
-      onClick={onClick}
-      className={`text-[16px] font-medium px-4 py-3.5 rounded-xl transition-all duration-200 no-underline ${
-        active
-          ? 'text-accent bg-green-50'
-          : 'text-[#444] hover:text-accent hover:bg-green-50'
-      }`}
-    >
-      {children}
-    </a>
+    <div className="flex flex-col gap-3 pb-4 border-b border-black/5">
+      <div className="text-[16px] font-bold text-[#1a1a1a]">{label}</div>
+      <div className="flex flex-col gap-2 pl-3 border-l-2 border-black/5">
+        {children}
+      </div>
+    </div>
   );
 }
