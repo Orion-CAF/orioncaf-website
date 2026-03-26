@@ -43,7 +43,7 @@ export default function Hero({ dict, lang }: { dict: any; lang?: string }) {
 
   return (
     <section className="relative text-center px-6 md:px-16 pt-20 md:pt-28 pb-16 md:pb-24 min-h-[85vh] flex flex-col items-center justify-center w-full overflow-hidden">
-      <ThreeHeroCanvas key={`${lang}-${pathname}`} langKey={lang} />
+      <ThreeHeroCanvas langKey={lang} />
 
       <div className="relative z-10 flex flex-col items-center w-full mt-[10vh]">
         <div className="relative z-10">

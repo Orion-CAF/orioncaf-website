@@ -219,20 +219,26 @@ export default function ThreeHeroCanvas({ langKey }: { langKey?: string }) {
     };
     animate();
 
-    const handleResize = () => {
-      if (!mountRef.current) return;
-      const newWidth = mountRef.current.clientWidth;
-      const newHeight = mountRef.current.clientHeight;
-      camera.aspect = newWidth / newHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(newWidth, newHeight);
-    };
-    window.addEventListener('resize', handleResize);
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const newWidth = entry.contentRect.width;
+        const newHeight = entry.contentRect.height;
+        if (newWidth > 0 && newHeight > 0) {
+          camera.aspect = newWidth / newHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(newWidth, newHeight);
+        }
+      }
+    });
+
+    if (mountRef.current) {
+      resizeObserver.observe(mountRef.current);
+    }
 
     // Cleanup
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animationId);
       clearTimeout(timeoutId); // MUST clear timeout to avoid memory leak and ghost updates
 

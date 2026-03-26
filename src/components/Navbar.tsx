@@ -63,11 +63,19 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
       label: dict.projects,
       subMenus: [{
         title: dict.projects,
-        items: (dict.projectsMenu || []).map((item: any, i: number) => ({
-          label: item.label, description: "",
-          icon: projectIcons[i % projectIcons.length],
-          href: `/${lang}/projects/${item.slug}`,
-        })),
+        items: (dict.projectsMenu || []).map((item: any, i: number) => {
+          let href = `/${lang}/projects/${item.slug}`;
+          if (item.slug?.toLowerCase() === 'lawbuddy') {
+            href = "https://caturan.github.io/lawbuddy-website/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn0w_DBmtL4WkaU_-ZIvKVbr_6G_XI96srZOAgx_lA7eqU_tugtdUV4l7coUg_aem_zV25pT99Ae-wYT74xAnTzA";
+          } else if (item.slug?.toLowerCase() === 'ai-pulse' || item.slug?.toLowerCase() === 'aipulse') {
+            href = "https://aipulse-seven.vercel.app";
+          }
+          return {
+            label: item.label, description: "",
+            icon: projectIcons[i % projectIcons.length],
+            href,
+          };
+        }),
       }],
     },
     {
@@ -129,7 +137,7 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
             {lang === 'tr' ? 'EN' : 'TR'}
           </Link>
           <div className="hidden md:block">
-            <RainbowButton onClick={() => { setSelectedProduct(""); setIsContactOpen(true); }}>
+            <RainbowButton className="text-[13px] font-semibold h-9 px-4" onClick={() => { setSelectedProduct(""); setIsContactOpen(true); }}>
               {dict.contact}
             </RainbowButton>
           </div>
@@ -162,9 +170,17 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
             </MobileAccordion>
 
             <MobileAccordion label={dict.projects}>
-              {dict.projectsMenu?.map((item: any, i: number) => (
-                <Link key={i} href={`/${lang}/projects/${item.slug}`} className="mobile-sublink" onClick={() => setIsMobileOpen(false)}>{item.label}</Link>
-              ))}
+              {dict.projectsMenu?.map((item: any, i: number) => {
+                let href = `/${lang}/projects/${item.slug}`;
+                if (item.slug?.toLowerCase() === 'lawbuddy') {
+                  href = "https://caturan.github.io/lawbuddy-website/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQMMjU2MjgxMDQwNTU4AAGn0w_DBmtL4WkaU_-ZIvKVbr_6G_XI96srZOAgx_lA7eqU_tugtdUV4l7coUg_aem_zV25pT99Ae-wYT74xAnTzA";
+                } else if (item.slug?.toLowerCase() === 'ai-pulse' || item.slug?.toLowerCase() === 'aipulse') {
+                  href = "https://aipulse-seven.vercel.app";
+                }
+                return (
+                  <Link key={i} href={href} className="mobile-sublink" onClick={() => setIsMobileOpen(false)}>{item.label}</Link>
+                );
+              })}
             </MobileAccordion>
             
             <MobileAccordion label={dict.research}>
@@ -178,7 +194,7 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
             </Link>
           </div>
           <div className="mt-8 pt-6">
-            <RainbowButton onClick={() => { setIsMobileOpen(false); setSelectedProduct(""); setIsContactOpen(true); }} className="w-full">
+            <RainbowButton onClick={() => { setIsMobileOpen(false); setSelectedProduct(""); setIsContactOpen(true); }} className="w-full text-[13px] font-semibold h-11">
               {dict.contact}
             </RainbowButton>
           </div>
