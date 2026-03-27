@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
     if (process.env.RESEND_API_KEY) {
       const { data, error } = await resend.emails.send({
-        from: 'OrionCAF Contact Form <onboarding@resend.dev>',
+        from: 'OrionCAF Contact Form <contact@orioncaf.com>',
         to: ['info@orioncaf.com'],
         subject: `[OrionCAF Web] New Lead from ${name}`,
         html: `
