@@ -4,7 +4,26 @@
     "projects": "Projects",
     "research": "Research",
     "about": "About",
-    "contact": "Start a Project"
+    "pricing": "Pricing",
+    "contact": "Start a Project",
+    "solutionsMenu": ["Workflow Automation (n8n)", "Real-Time Voice AI", "LLM Fine-Tuning", "RAG & Knowledge Systems", "AI Architecture & Consulting", "AI-Powered Mobile", "MLOps & Deployment"],
+    "projectsMenu": [
+      { "label": "Turkish LLM & Voice Models", "slug": "turkce-llm-ve-ses-modelleri" },
+      { "label": "Enterprise Legal RAG", "slug": "kurumsal-hukuk-rag-sistemi" },
+      { "label": "AI Agents", "slug": "yapay-zeka-ajanlari" },
+      { "label": "LawBuddy — Legal Ecosystem", "slug": "lawbuddy-hukuk-ekosistemi" },
+      { "label": "AI Pulse — Paper Tracking", "slug": "ai-pulse-makale-takibi" },
+      { "label": "Real-Time AI", "slug": "gercek-zamanli-ai" },
+      { "label": "Speech-to-Speech AI", "slug": "sesten-sese-yapay-zeka" },
+      { "label": "Tourism Operations Bot", "slug": "turizm-operasyonlari-botu" }
+    ],
+    "researchMenu": [
+      { "label": "Blogs", "href": "/research/blogs" },
+      { "label": "Articles", "href": "/research/articles" }
+    ],
+    "aboutMenu": [
+      { "label": "About Us", "href": "#about" }
+    ]
   },
   "hero": {
     "badge": "AI Engineering from Turkey",
