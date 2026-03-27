@@ -1,11 +1,8 @@
-Type error: Type 'typeof import("/vercel/path0/src/app/[lang]/layout")' does not satisfy the constraint 'LayoutConfig<"/[lang]">'.
-  Types of property 'default' are incompatible.
-    Type '({ children, params, }: Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>) => Promise<Element>' is not assignable to type 'ComponentType<LayoutProps<"/[lang]">> | ((props: LayoutProps<"/[lang]">) => void | ReactNode | Promise<ReactNode> | Promise<...>)'.
-      Type '({ children, params, }: Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>) => Promise<Element>' is not assignable to type 'FunctionComponent<LayoutProps<"/[lang]">>'.
-        Types of parameters '__0' and 'props' are incompatible.
-          Type 'LayoutProps<"/[lang]">' is not assignable to type 'Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>'.
-            Types of property 'params' are incompatible.
-              Type 'Promise<{ lang: string; }>' is not assignable to type 'Promise<{ lang: "en" | "tr"; }>'.
-                Type '{ lang: string; }' is not assignable to type '{ lang: "en" | "tr"; }'.
-                  Types of property 'lang' are incompatible.
-                    Type 'string' is not assignable to type '"en" | "tr"'.
+cevdetahmetturan@192 orioncaf-website % git config pull.rebase false
+
+cevdetahmetturan@192 orioncaf-website % git config pull.rebase false
+
+cevdetahmetturan@192 orioncaf-website % git pull
+Auto-merging src/app/[lang]/layout.tsx
+CONFLICT (content): Merge conflict in src/app/[lang]/layout.tsx
+Automatic merge failed; fix conflicts and then commit the result.

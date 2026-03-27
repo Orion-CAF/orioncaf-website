@@ -4,7 +4,26 @@
     "projects": "Projeler",
     "research": "Araştırmalar",
     "about": "Hakkımızda",
-    "contact": "Projeye Başla"
+    "pricing": "Fiyatlandırma",
+    "contact": "Projeye Başla",
+    "solutionsMenu": ["İş Akışı Otomasyonu (n8n)", "Gerçek Zamanlı Ses AI", "LLM İnce Ayar (Fine-Tuning)", "RAG & Bilgi Sistemleri", "Yapay Zeka Mimari & Danışmanlık", "Yapay Zeka Destekli Mobil", "Altyapı & Devreye Alma (MLOps)"],
+    "projectsMenu": [
+      { "label": "Türkçe LLM ve Ses Modelleri", "slug": "turkce-llm-ve-ses-modelleri" },
+      { "label": "Kurumsal Hukuk RAG Sistemi", "slug": "kurumsal-hukuk-rag-sistemi" },
+      { "label": "Yapay Zeka Ajanları", "slug": "yapay-zeka-ajanlari" },
+      { "label": "LawBuddy — Hukuk Ekosistemi", "slug": "lawbuddy-hukuk-ekosistemi" },
+      { "label": "AI Pulse — Makale Takibi", "slug": "ai-pulse-makale-takibi" },
+      { "label": "Gerçek Zamanlı AI", "slug": "gercek-zamanli-ai" },
+      { "label": "Sesten-Sese Yapay Zeka", "slug": "sesten-sese-yapay-zeka" },
+      { "label": "Turizm Operasyonları Botu", "slug": "turizm-operasyonlari-botu" }
+    ],
+    "researchMenu": [
+      { "label": "Blogs", "href": "/research/blogs" },
+      { "label": "Makaleler", "href": "/research/articles" }
+    ],
+    "aboutMenu": [
+      { "label": "Hakkımızda", "href": "#about" }
+    ]
   },
   "hero": {
     "badge": "Türkiye'den Yapay Zeka Mühendisliği",
