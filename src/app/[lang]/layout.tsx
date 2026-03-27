@@ -38,7 +38,7 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary(lang as 'en' | 'tr');
   const cookieStore = await cookies();
   const themeCookie = cookieStore.get('orioncaf-ui-theme')?.value as "dark" | "light" | undefined;
   const initialTheme = themeCookie || 'light';

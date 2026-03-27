@@ -1,21 +1,19 @@
-2026-03-27T11:49:25.412Z  ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-2026-03-27T11:49:25.436Z  Creating an optimized production build ...
-2026-03-27T11:49:36.200Z  ✓ Compiled successfully in 10.4s
-2026-03-27T11:49:36.202Z  Running TypeScript ...
-2026-03-27T11:49:41.776Z  Failed to type check.
-2026-03-27T11:49:41.776Z  
-2026-03-27T11:49:41.780Z  Type error: Type 'typeof import("/vercel/path0/src/app/[lang]/layout")' does not satisfy the constraint 'LayoutConfig<"/[lang]">'.
-2026-03-27T11:49:41.780Z  Types of property 'default' are incompatible.
-2026-03-27T11:49:41.780Z  Type '({ children, params, }: Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>) => Promise<Element>' is not assignable to type 'ComponentType<LayoutProps<"/[lang]">> | ((props: LayoutProps<"/[lang]">) => void | ReactNode | Promise<ReactNode> | Promise<...>)'.
-2026-03-27T11:49:41.781Z  Type '({ children, params, }: Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>) => Promise<Element>' is not assignable to type 'FunctionComponent<LayoutProps<"/[lang]">>'.
-2026-03-27T11:49:41.781Z  Types of parameters '__0' and 'props' are incompatible.
-2026-03-27T11:49:41.781Z  Type 'LayoutProps<"/[lang]">' is not assignable to type 'Readonly<{ children: ReactNode; params: Promise<{ lang: "en" | "tr"; }>; }>'.
-2026-03-27T11:49:41.781Z  Types of property 'params' are incompatible.
-2026-03-27T11:49:41.781Z  Type 'Promise<{ lang: string; }>' is not assignable to type 'Promise<{ lang: "en" | "tr"; }>'.
-2026-03-27T11:49:41.781Z  Type '{ lang: string; }' is not assignable to type '{ lang: "en" | "tr"; }'.
-2026-03-27T11:49:41.781Z  Types of property 'lang' are incompatible.
-2026-03-27T11:49:41.782Z  Type 'string' is not assignable to type '"en" | "tr"'.
-2026-03-27T11:49:41.782Z  
-2026-03-27T11:49:41.818Z  Next.js build worker exited with code: 1 and signal: null
-2026-03-27T11:49:41.856Z  Error: Command "npm run build" exited with 1
+2026-03-27T11:52:55.469Z  ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+2026-03-27T11:52:55.496Z  Creating an optimized production build ...
+2026-03-27T11:53:06.325Z  ✓ Compiled successfully in 10.5s
+2026-03-27T11:53:06.327Z  Running TypeScript ...
+2026-03-27T11:53:11.900Z  Failed to type check.
+2026-03-27T11:53:11.901Z  
+2026-03-27T11:53:11.902Z  ./src/app/[lang]/layout.tsx:41:36
+2026-03-27T11:53:11.902Z  Type error: Argument of type 'string' is not assignable to parameter of type '"en" | "tr"'.
+2026-03-27T11:53:11.902Z  
+2026-03-27T11:53:11.903Z  39 | }>) {
+2026-03-27T11:53:11.903Z  40 |   const { lang } = await params;
+2026-03-27T11:53:11.903Z  > 41 |   const dict = await getDictionary(lang);
+2026-03-27T11:53:11.903Z  |                                    ^
+2026-03-27T11:53:11.903Z  42 |   const cookieStore = await cookies();
+2026-03-27T11:53:11.903Z  43 |   const themeCookie = cookieStore.get('orioncaf-ui-theme')?.value as "dark" | "light" | un...
+2026-03-27T11:53:11.903Z  44 |   const initialTheme = themeCookie || 'light';
+2026-03-27T11:53:11.940Z  Next.js build worker exited with code: 1 and signal: null
+2026-03-27T11:53:11.981Z  Error: Command "npm run build" exited with 1
 status  ● Error
