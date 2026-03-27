@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { cookies } from "next/headers";
 import AnimeV3Client from "@/components/AnimeV3Client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ShootingStars } from "@/components/ui/shooting-stars";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import { getDictionary } from "@/app/dictionaries";
 import "../globals.css";
 
@@ -39,22 +37,17 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const dict = await getDictionary(lang as 'en' | 'tr');
-  const cookieStore = await cookies();
-  const themeCookie = cookieStore.get('orioncaf-ui-theme')?.value as "dark" | "light" | undefined;
-  const initialTheme = themeCookie || 'light';
 
   return (
-    <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased ${initialTheme}`} suppressHydrationWarning>
+    <html lang={lang} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col relative bg-[#fcfbf9]" suppressHydrationWarning>
-        <ThemeProvider serverTheme={initialTheme}>
-          <ShootingStars className="z-0 opacity-50" />
-          <Navbar dict={dict.nav} lang={lang} contactDict={dict.contactModal} />
-          <main className="flex-1 relative z-10">
-            {children}
-          </main>
-          <Footer dict={dict.footer} />
-          <AnimeV3Client />
-        </ThemeProvider>
+        <ShootingStars className="z-0 opacity-50" />
+        <Navbar dict={dict.nav} lang={lang} contactDict={dict.contactModal} />
+        <main className="flex-1 relative z-10">
+          {children}
+        </main>
+        <Footer dict={dict.footer} />
+        <AnimeV3Client />
       </body>
     </html>
   );

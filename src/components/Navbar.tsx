@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import ContactModal from "./ContactModal";
 import { MegaMenu } from "./ui/mega-menu";
 import type { MegaMenuItem } from "./ui/mega-menu";
-import { AnimatedThemeToggle } from "./ui/animated-theme-toggle";
 import { RainbowButton } from "./ui/rainbow-button";
 import {
   Cpu, Globe, Mic, BookOpen, BrainCircuit, Smartphone, Server,
@@ -132,8 +131,7 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-3">
-          <AnimatedThemeToggle />
-          <Link href={lang === 'tr' ? '/en' : '/tr'} className="text-[13px] font-semibold text-[#555] hover:text-[#1a1a1a] cursor-pointer uppercase transition-colors duration-200">
+<Link href={lang === 'tr' ? '/en' : '/tr'} className="text-[13px] font-semibold text-[#555] hover:text-[#1a1a1a] cursor-pointer uppercase transition-colors duration-200">
             {lang === 'tr' ? 'EN' : 'TR'}
           </Link>
           <div className="hidden md:block">
