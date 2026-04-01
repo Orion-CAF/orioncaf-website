@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import ContactModal from "./ContactModal";
 import { MegaMenu } from "./ui/mega-menu";
@@ -112,16 +113,7 @@ export default function Navbar({ dict, lang, contactDict }: { dict: any; lang: s
     <>
       <nav className={`fixed w-full top-0 z-[100] flex items-center justify-between px-6 md:px-16 h-[72px] bg-[#FFF7ED]/95 backdrop-blur-lg border-b border-black/[0.06] transition-all duration-300 ${scrolled ? 'shadow-[0_2px_16px_rgba(0,0,0,0.06)]' : ''}`}>
         <Link href={`/${lang}`} className="flex items-center gap-2 text-[17px] font-bold tracking-tight text-[#1a1a1a] no-underline">
-          <svg className="orion-logo-svg" viewBox="0 0 160 30" width="120" height="22">
-            <g transform="translate(0, 20)">
-              <text className="logo-text-outline" x="0" y="0" fontFamily="inherit" fontWeight="bold" fontSize="22" fill="transparent" stroke="#1a1a1a" strokeWidth="0.8">
-                OrionCAF
-              </text>
-              <text className="logo-text-fill opacity-0" x="0" y="0" fontFamily="inherit" fontWeight="bold" fontSize="22" fill="#1a1a1a">
-                OrionCAF
-              </text>
-            </g>
-          </svg>
+          <Image src="/logo.png" alt="OrionCAF" width={120} height={40} className="object-contain" />
         </Link>
 
         {/* DESKTOP NAV */}

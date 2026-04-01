@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { dispatchContactModal } from "./ContactModal";
 
 export default function Footer({ dict }: { dict: any }) {
@@ -9,9 +10,8 @@ export default function Footer({ dict }: { dict: any }) {
         
         {/* Brand & Contact Info */}
         <div className="md:col-span-2 flex flex-col">
-          <div className="text-[20px] font-bold flex items-center gap-2.5 mb-5 text-[#1a1a1a]">
-            <div className="w-3 h-3 rounded-full bg-accent footer-brand-dot shadow-[0_0_12px_rgba(73,125,21,0.5)]"></div>
-            OrionCAF
+          <div className="flex items-center gap-2.5 mb-5">
+            <Image src="/logo.png" alt="OrionCAF" width={120} height={40} className="object-contain" />
           </div>
           <p className="text-[14px] text-[#666] leading-[1.7] max-w-[280px] mb-8">
             {dict.tagline}
